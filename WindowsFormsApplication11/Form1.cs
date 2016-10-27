@@ -25,6 +25,11 @@ namespace WindowsFormsApplication11
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            int actualizar=0; //contador que cada x armas guarde el archivo
+            //int guardar = 0; ; //contador que cada x armas guarde el archivo
+            HttpClient web2 = new HttpClient();
+            HttpClient web = new HttpClient();
+            string info2;
             int amigo = 1;
             Meli m = new Meli(754014355650430, "jR9v7lRr06CfzhSOdppHyrNSMhxYKCKb");
             string cambiarvida = textBox1.Text;
@@ -36,12 +41,16 @@ namespace WindowsFormsApplication11
             p.Name = "access_token";
             p.Value = m.AccessToken;
             ps.Add(p);
-            string info2 = File.ReadAllText(@"op.txt");
+            if (checkBox1.Checked== true ){
+                info2 = File.ReadAllText(Convert.ToString(openFileDialog1.FileName));
+            }
+            else
+            {
+                var info = web.GetStringAsync("https://api.opskins.com/IPricing/GetAllLowestListPrices/v1/?appid=730&format=json_pretty");
+                info2 = info.Result;
+            }
             var picturess = new List<Parameter>(); //Fin mercadolibre
-            HttpClient web2 = new HttpClient();
             Dictionary<string, decimal> armas = new Dictionary<string, decimal>();
-            HttpClient web = new HttpClient();
-           // var info = web.GetStringAsync("https://api.opskins.com/IPricing/GetAllLowestListPrices/v1/?appid=730&format=json_pretty");
             var hola = JObject.Parse(info2);
             var HOLA = (JObject)hola["response"];
             foreach (var item in HOLA)
@@ -51,7 +60,15 @@ namespace WindowsFormsApplication11
 
             foreach (KeyValuePair<string, decimal> item in armas)
             {
-                m.refreshToken();
+             /* if (guardar == 100)
+                {
+
+                    guardar = 0;
+                }*/
+                if (actualizar == 700) { 
+                m.refreshToken(m.RefreshToken);
+                actualizar = 0;
+                }
                 decimal precio = item.Value / 100;
                 decimal venta;
                 int argentino = Convert.ToInt32(precio * 16);
@@ -188,6 +205,7 @@ namespace WindowsFormsApplication11
                 doc.OptionWriteEmptyNodes = true;
                 try
                 {
+                    
                     var webRequest = HttpWebRequest.Create("https://www.lootmarket.com/csgo/item/" + item.Key);
                     Stream stream = webRequest.GetResponse().GetResponseStream();
                     doc.Load(stream);
@@ -208,7 +226,11 @@ namespace WindowsFormsApplication11
                     string nodo1 = words[3];
                     object tamanho = new { source = nodo1 };
                     object[] attr = { tamanho };
-                    IRestResponse response = m.Post("/items", ps, new { title = "Skin " + item.Key + " CsGo ", category_id = "MLA374211", price = venta, listing_type_id = "gold_pro", currency_id = "ARS", available_quantity = 10, buying_mode = "buy_it_now", condition = "new", description = "<div id=\"body\" ms.pgarea=\"body\" class=\"\"> <div><span style=\"text-decoration: underline; color: #0000ff;\"><span style=\"font-size: xx-large;\"><strong>¡Venta de skins CSGO!<br></strong></span></span><p></p></div><div><span style=\"text-decoration: underline; color: #ff0000;\"><span style=\"font-size: xx-large;\"></span></span></div><div><span style=\"text-decoration: underline; color: #ff0000;\"><span style=\"font-size: xx-large;\"><strong><br></strong></span></span></div><div></div><img class=\"\" src=\"http://www.csgopools.com/wp-content/uploads/2015/03/cs-go-skincollection.png\" data-src=\"http://www.csgopools.com/wp-content/uploads/2015/03/cs-go-skincollection.png\"><noscript>&amp;amp;amp;amp;lt;img src=\"https://mla-s2-p.mlstatic.com/103421-MLA20770097984_062016-C.jpg\" /&amp;amp;amp;amp;gt;</noscript><h2>Requisitos:</h2><ul> <li>Tener en \"publico\" el inventario</li> <li>Tener\"Steam Guard Mobile Authenticator\" activo</li> </ul><h2>Descripción: </h2> <p></p><p></p><p><strong><span style=\"font-size: large;\">Arma:</span> </strong><span style=\"font-size: large;\"><span style=\"color: #ff0000;\"><strong>" + item.Key + "</strong></span><br></span></p> <p><strong><span style=\"font-size: large;\">El intercambio se hace a través del intercambio de Steam</span></strong>&nbsp; <span style=\"font-size: large; color: #ff0000;\"></span></p><p></p><p></p> <p><span style=\"font-size: large;color: #067935;\"><strong>Se posee otros estados de esta misma arma , consulte.</strong></span></p> <p><span style=\"font-size: large;color: #da00ff;\"><strong>Tenemos todo tipos de skins!</strong></span></p><span style=\"font-size: x-large;color: #731616;\"><u><strong>Importante: Antes de ofertar consultar stock!</strong></u></span> </div>", video_id = "", warranty = "", pictures = attr });
+                    string nombre = item.Key;
+                    nombre= nombre.Replace("\u2605", "");//Le saca las estrellas que hacen ver mal la publicacion
+                    nombre=nombre.Replace("\u2122", "");
+
+                    IRestResponse response = m.Post("/items", ps, new { title = "Skin " + nombre + " CsGo ", category_id = "MLA374211", price = venta, listing_type_id = "gold_pro", currency_id = "ARS", available_quantity = 10, buying_mode = "buy_it_now", condition = "new", description = "<div id=\"body\" ms.pgarea=\"body\" class=\"\"> <div><span style=\"text-decoration: underline; color: #0000ff;\"><span style=\"font-size: xx-large;\"><strong>¡Venta de skins CSGO!<br></strong></span></span><p></p></div><div><span style=\"text-decoration: underline; color: #ff0000;\"><span style=\"font-size: xx-large;\"></span></span></div><div><span style=\"text-decoration: underline; color: #ff0000;\"><span style=\"font-size: xx-large;\"><strong><br></strong></span></span></div><div></div><img class=\"\" src=\"http://www.csgopools.com/wp-content/uploads/2015/03/cs-go-skincollection.png\" data-src=\"http://www.csgopools.com/wp-content/uploads/2015/03/cs-go-skincollection.png\"><noscript>&amp;amp;amp;amp;lt;img src=\"https://mla-s2-p.mlstatic.com/103421-MLA20770097984_062016-C.jpg\" /&amp;amp;amp;amp;gt;</noscript><h2>Requisitos:</h2><ul> <li>Tener en \"publico\" el inventario</li> <li>Tener\"Steam Guard Mobile Authenticator\" activo</li> </ul><h2>Descripción: </h2> <p></p><p></p><p><strong><span style=\"font-size: large;\">Arma:</span> </strong><span style=\"font-size: large;\"><span style=\"color: #ff0000;\"><strong>" + nombre + "</strong></span><br></span></p> <p><strong><span style=\"font-size: large;\">El intercambio se hace a través del intercambio de Steam</span></strong>&nbsp; <span style=\"font-size: large; color: #ff0000;\"></span></p><p></p><p></p> <p><span style=\"font-size: large;color: #067935;\"><strong>Se posee otros estados de esta misma arma , consulte.</strong></span></p> <p><span style=\"font-size: large;color: #da00ff;\"><strong>Tenemos todo tipos de skins!</strong></span></p><span style=\"font-size: x-large;color: #731616;\"><u><strong>Importante: Antes de ofertar consultar stock!</strong></u></span> </div>", video_id = "", warranty = "", pictures = attr });
                     string ab = response.Content;
                     label4.Text = Convert.ToString(amigo);
                     amigo = amigo + 1;
@@ -220,6 +242,7 @@ namespace WindowsFormsApplication11
                     contador = contador + 1;
 
                 }
+                actualizar = actualizar + 1;
             }
 
 
@@ -244,6 +267,33 @@ namespace WindowsFormsApplication11
         private void label3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void openFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
+
+        public void button3_Click(object sender, EventArgs e)
+        {
+            //Si necesitas abrir un archivo
+            DialogResult result = openFileDialog1.ShowDialog();
+            textBox2.Text=Convert.ToString(openFileDialog1.FileName); 
         }
     }
     }

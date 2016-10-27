@@ -17,3 +17,16 @@ c:\users\tity\documents\visual studio 2015\Projects\WindowsFormsApplication11\Wi
 C:\Users\Tity\Documents\GitHub\OPCrew\WindowsFormsApplication11\bin\Debug\WindowsFormsApplication11.exe.config
 C:\Users\Tity\Documents\GitHub\OPCrew\WindowsFormsApplication11\obj\Debug\WindowsFormsApplication11.exe
 C:\Users\Tity\Documents\GitHub\OPCrew\WindowsFormsApplication11\obj\Debug\WindowsFormsApplication11.pdb
+C:\Users\pc\Documents\GitHub\MLCrew\WindowsFormsApplication11\bin\Debug\WindowsFormsApplication11.exe.config
+C:\Users\pc\Documents\GitHub\MLCrew\WindowsFormsApplication11\obj\Debug\WindowsFormsApplication11.exe
+C:\Users\pc\Documents\GitHub\MLCrew\WindowsFormsApplication11\obj\Debug\WindowsFormsApplication11.pdb
+C:\Users\pc\Documents\GitHub\MLCrew\WindowsFormsApplication11\bin\Debug\WindowsFormsApplication11.exe
+C:\Users\pc\Documents\GitHub\MLCrew\WindowsFormsApplication11\bin\Debug\WindowsFormsApplication11.pdb
+C:\Users\pc\Documents\GitHub\MLCrew\WindowsFormsApplication11\bin\Debug\HtmlAgilityPack.dll
+C:\Users\pc\Documents\GitHub\MLCrew\WindowsFormsApplication11\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\pc\Documents\GitHub\MLCrew\WindowsFormsApplication11\bin\Debug\HtmlAgilityPack.xml
+C:\Users\pc\Documents\GitHub\MLCrew\WindowsFormsApplication11\bin\Debug\net-sdk.pdb
+C:\Users\pc\Documents\GitHub\MLCrew\WindowsFormsApplication11\obj\Debug\WindowsFormsApplication11.csprojResolveAssemblyReference.cache
+C:\Users\pc\Documents\GitHub\MLCrew\WindowsFormsApplication11\obj\Debug\WindowsFormsApplication11.Form1.resources
+C:\Users\pc\Documents\GitHub\MLCrew\WindowsFormsApplication11\obj\Debug\WindowsFormsApplication11.Properties.Resources.resources
+C:\Users\pc\Documents\GitHub\MLCrew\WindowsFormsApplication11\obj\Debug\WindowsFormsApplication11.csproj.GenerateResource.Cache

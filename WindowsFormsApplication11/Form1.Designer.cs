@@ -178,7 +178,7 @@
             this.Controls.Add(this.button1);
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "MLCrew";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

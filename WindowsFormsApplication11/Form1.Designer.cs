@@ -65,7 +65,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(128, 65);
+            this.label1.Location = new System.Drawing.Point(140, 65);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(56, 17);
@@ -101,9 +101,9 @@
             this.label3.Location = new System.Drawing.Point(13, 290);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(82, 17);
+            this.label3.Size = new System.Drawing.Size(74, 17);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Publicando:";
+            this.label3.Text = "Publicado:";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
@@ -119,7 +119,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(16, 207);
+            this.checkBox1.Location = new System.Drawing.Point(16, 253);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(110, 21);
             this.checkBox1.TabIndex = 7;
@@ -134,7 +134,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(16, 147);
+            this.button3.Location = new System.Drawing.Point(16, 149);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(110, 23);
             this.button3.TabIndex = 8;
@@ -144,27 +144,29 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(204, 150);
+            this.textBox2.Location = new System.Drawing.Point(204, 148);
             this.textBox2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(132, 22);
             this.textBox2.TabIndex = 9;
+            this.textBox2.Visible = false;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(133, 150);
+            this.label5.Location = new System.Drawing.Point(137, 153);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(59, 17);
             this.label5.TabIndex = 10;
             this.label5.Text = "Archivo:";
+            this.label5.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(378, 415);
+            this.ClientSize = new System.Drawing.Size(421, 415);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.button3);

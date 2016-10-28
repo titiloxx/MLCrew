@@ -212,19 +212,9 @@ namespace WindowsFormsApplication11
                     Stream stream = webRequest.GetResponse().GetResponseStream();
                     doc.Load(stream);
                     stream.Close();
-                    //*[@id="mainContents"]/div[2]/div/div[1]/img
-                    //get the div by id and then get the inner text 
-                    //string testDivSelector = "//*[@id=\"mainContents\"]//div//div/div//img";
                     string testDivSelector = "//*[@class=\"content csgo-thumbnail\"]";
                     var node = doc.DocumentNode.SelectSingleNode(testDivSelector).InnerHtml;
                     string[] words = node.Split('\'');
-
-                    //*[@id="mainContents"]/div[2]/div/div[1]/img
-                    //get the div by id and then get the inner text 
-                    //string testDivSelector = "//*[@id=\"mainContents\"]//div//div/div//img";
-                    //var text = web3.GetStringAsync("http://csgobackpack.net/api/GetItemPrice/?currency=USD&time=7&icon=1&id=" + item.Key);
-                    //var steam = JsonConvert.DeserializeObject<JObject>(text.Result);
-                    //string pic = Convert.ToString(steam["icon"]);
                     string nodo1 = words[3];
                     object tamanho = new { source = nodo1 };
                     object[] attr = { tamanho };
@@ -309,6 +299,69 @@ namespace WindowsFormsApplication11
                 checkBox1.Checked = true;
             }
     }
+
+        private void Publicar_Click(object sender, EventArgs e)
+        {
+            Meli m = new Meli(754014355650430, "jR9v7lRr06CfzhSOdppHyrNSMhxYKCKb");
+          try
+           {
+                string cambiarvida = textBox1.Text;
+                m.Authorize(cambiarvida, "http://localhost:3000");
+               try
+                {
+                    string nombre = textBox3.Text;
+                    var doc = new HtmlAgilityPack.HtmlDocument();
+                    var webRequest = HttpWebRequest.Create("https://www.lootmarket.com/csgo/item/" + nombre);
+                    Stream stream = webRequest.GetResponse().GetResponseStream();
+                    doc.Load(stream);
+                    stream.Close();
+                    string testDivSelector = "//*[@class=\"content csgo-thumbnail\"]";
+                    var node = doc.DocumentNode.SelectSingleNode(testDivSelector).InnerHtml;
+                    string[] words = node.Split('\'');
+                    string nodo1 = words[3];
+                    object tamanho = new { source = nodo1 };
+                    object[] attr = { tamanho };
+                    var picturess = new List<Parameter>(); //Fin mercadolibre
+                    var p = new Parameter();
+                    var ps = new List<Parameter>();
+                    p.Name = "access_token";
+                    p.Value = m.AccessToken;
+                    ps.Add(p);
+                    string cuchi;
+                    if (nombre.Contains("\u2605"))
+                    {
+                        cuchi = "Cuchi";
+                    }
+                    else
+                    {
+                        cuchi = "";
+                    }
+                    nombre = nombre.Replace("\u2605", "");//Le saca las estrellas que hacen ver mal la publicacion
+                    nombre = nombre.Replace("\u2122", "");
+                    IRestResponse response = m.Post("/items", ps, new { title = "CSGO " + nombre + " SKIN " + cuchi, category_id = "MLA374211", price = Convert.ToInt32(textBox4.Text), listing_type_id = "free", currency_id = "ARS", available_quantity = 1, buying_mode = "buy_it_now", condition = "used", description = "<div id=\"body\" ms.pgarea=\"body\" class=\"\"> <div><span style=\"text-decoration: underline; color: #0000ff;\"><span style=\"font-size: xx-large;\"><strong>¡Venta de skins CSGO!<br></strong></span></span><p></p></div><div><span style=\"text-decoration: underline; color: #ff0000;\"><span style=\"font-size: xx-large;\"></span></span></div><div><span style=\"text-decoration: underline; color: #ff0000;\"><span style=\"font-size: xx-large;\"><strong><br></strong></span></span></div><div></div><img class=\"\" src=\"http://www.csgopools.com/wp-content/uploads/2015/03/cs-go-skincollection.png\" data-src=\"http://www.csgopools.com/wp-content/uploads/2015/03/cs-go-skincollection.png\"><noscript>&amp;amp;amp;amp;lt;img src=\"https://mla-s2-p.mlstatic.com/103421-MLA20770097984_062016-C.jpg\" /&amp;amp;amp;amp;gt;</noscript><h2>Requisitos:</h2><ul> <li>Tener en \"publico\" el inventario</li> <li>Tener\"Steam Guard Mobile Authenticator\" activo</li> </ul><h2>Descripción: </h2> <p></p><p></p><p><strong><span style=\"font-size: large;\">Arma:</span> </strong><span style=\"font-size: large;\"><span style=\"color: #ff0000;\"><strong>" + nombre + "</strong></span><br></span></p> <p><strong><span style=\"font-size: large;\">El intercambio se hace a través del intercambio de Steam</span></strong>&nbsp; <span style=\"font-size: large; color: #ff0000;\"></span></p><p></p><p></p> <p><span style=\"font-size: large;color: #067935;\"><strong>Se posee otros estados de esta misma arma , consulte.</strong></span></p> <p><span style=\"font-size: large;color: #da00ff;\"><strong>Tenemos todo tipos de skins!</strong></span></p><span style=\"font-size: x-large;color: #731616;\"><u><strong>Importante: Antes de ofertar consultar stock!</strong></u></span> </div>", video_id = "", warranty = "", pictures = attr });
+                    var hola = JObject.Parse(response.Content);
+                    var HOLA = (JValue)hola["permalink"];
+                     Clipboard.SetText(Convert.ToString(HOLA));
+                    MessageBox.Show("Arma publicada con exito y link copiado al clipboard!");
+               }
+
+
+                catch
+                {
+                    MessageBox.Show("Arma invalida, revise el texto ingresado");
+                }
+           }
+           catch
+            {
+                MessageBox.Show("Pone el codigo en la otra ventana!!");
+          }
+         
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
